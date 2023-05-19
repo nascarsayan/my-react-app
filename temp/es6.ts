@@ -102,3 +102,15 @@ const {
 
 console.log(comment1);
 console.log(comment2);
+
+//
+
+// Three ways to declare functions
+
+let addOne = (num: number) => num + 1;
+addOne = (num: number) => {
+return num + 1;
+};
+addOne = function (num: number) {
+return num + 1;
+};
