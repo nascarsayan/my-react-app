@@ -2,6 +2,7 @@ import { useState, useEffect } from 'preact/hooks';
 import './app.css';
 
 interface Task {
+  id: string;
   description: string;
   completed: boolean;
 }
@@ -50,12 +51,25 @@ function AddTask({ setTasks, tasks }: AddTaskProps) {
     setCurrentTask(target.value);
   };
 
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     const newTask = {
+      id: Math.random().toString(),
       description: currentTask,
       completed: false,
     };
-    setTasks([newTask, ...tasks]);
+
+    // POST request to the backend.
+    const response = await fetch(
+      "http://localhost:3000/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTask),
+    });
+    const task: Task = await response.json();
+    console.log(task);
+    setTasks([...tasks, task]);
     setCurrentTask("");
   };
 

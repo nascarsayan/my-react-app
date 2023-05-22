@@ -13,7 +13,7 @@ json-server ./data/db.json
 
 OR
 
-npx json-server ./data/db.json
+npx json-server .\data\db.json --host 0.0.0.0
 
 Then you can go to browser and see the results at the URLs:
 
