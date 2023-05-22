@@ -17,7 +17,6 @@ function SearchTask(
     setSearchText
   }: SearchTaskProps
   ) {
-  // TODO: Implement search over tasks
 
   const handleSearch = (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -25,11 +24,12 @@ function SearchTask(
   };
 
   return (
-    <div>
+    <div className={
+      "m-2 p-2 border-2 border-blue-500 rounded-sm"}>
       <input
         type="text"
         value={searchText}
-        onChange={handleSearch}
+        onInput={handleSearch}
         placeholder="Search task"
       />
     </div>
@@ -60,30 +60,45 @@ function AddTask({ setTasks, tasks }: AddTaskProps) {
   };
 
   return (
-    <div>
+    <div className={
+      "m-2 p-2 border-2 border-blue-500 rounded-sm"
+      }>
       <input
         type="text"
         placeholder="Add task"
         value={currentTask}
-        onChange={handleCurrentTask}
+        onInput={handleCurrentTask}
       />
-      <button onClick={handleAddTask}>Add</button>
+      <button 
+        className={
+          "ml-2 px-2 py-1 bg-blue-500 text-white rounded-sm"
+        }
+        onClick={handleAddTask}>Add</button>
     </div>
   );
 }
-function TaskList({ tasks }: { tasks: Task[] }) {
-  // TODO: Filter tasks based on search text
+
+interface TaskListProps {
+  tasks: Task[];
+  searchText: string;
+}
+
+function TaskList({ tasks, searchText }: TaskListProps) {
   return (
     <div>
-      <ul>
-        {
-          tasks.map((task) => (
-              <li>
-                {task.description}
+      <ul
+        className={"m-4 rounded-sm bg-gray-50"}
+        >
+        {tasks
+          .filter(
+            (task) => task.description.includes(searchText))
+          .map(
+            (task) => (
+              <li
+                className={"m-2 p-1 rounded-sm bg-gray-100"}
+                >{task.description}
               </li>
-            )
-          )
-        }
+          ))}
       </ul>
     </div>
   );
@@ -102,7 +117,7 @@ export function App() {
         tasks={tasks}
         setTasks={setTasks}
       />
-      <TaskList tasks={tasks}/>
+      <TaskList tasks={tasks} searchText={searchText}/>
     </>
   )
 }
