@@ -21,3 +21,17 @@ http://localhost:3000/tasks
 http://localhost:3000/tasks/1
 http://localhost:3000/tasks/2
 
+// Promises in javascript
+
+Each promise represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
+The code looks like this:
+
+const promise = new Promise((resolve, reject) => {
+  // do something asynchronous which eventually calls either:
+  //
+  //   resolve(someValue); // fulfilled
+  // or
+  //   reject("failure reason"); // rejected
+});
+
+

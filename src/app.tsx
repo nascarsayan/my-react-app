@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 import './app.css';
 
 interface Task {
@@ -107,17 +107,18 @@ function TaskList({ tasks, searchText }: TaskListProps) {
 export function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [searchText, setSearchText] = useState<string>("");
+  // Get the list of tasks from the backend instead.
+  useEffect(() => {
+    fetch("http://localhost:3000/tasks")
+      .then((response) => response.json())
+      .then((data) => setTasks(data));
+  }, []);
+
   return (
     <>
-      <SearchTask
-        searchText={searchText}
-        setSearchText={setSearchText}
-      />
-      <AddTask
-        tasks={tasks}
-        setTasks={setTasks}
-      />
-      <TaskList tasks={tasks} searchText={searchText}/>
+      <SearchTask searchText={searchText} setSearchText={setSearchText} />
+      <AddTask tasks={tasks} setTasks={setTasks} />
+      <TaskList tasks={tasks} searchText={searchText} />
     </>
-  )
+  );
 }
