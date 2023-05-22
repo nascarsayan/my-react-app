@@ -1,0 +1,24 @@
+{
+    "tasks": [
+        {
+            "id": "1",
+            "description": "Drink Water",
+            "completed": false
+        },
+        {
+            "id": "2",
+            "description": "Have tea",
+            "completed": false
+        },
+        {
+            "id": "3",
+            "description": "Go for a walk",
+            "completed": false
+        },
+        {
+            "id": "4",
+            "description": "Sleep well",
+            "completed": false
+        }
+    ]
+}
