@@ -94,10 +94,18 @@ function AddTask({ setTasks, tasks }: AddTaskProps) {
 
 interface TaskListProps {
   tasks: Task[];
+  setTasks: (tasks: Task[]) => void;
   searchText: string;
 }
 
-function TaskList({ tasks, searchText }: TaskListProps) {
+function TaskList({ tasks, setTasks, searchText }: TaskListProps) {
+  // function isStrikeThough(completed: boolean) {
+  //   if (completed) {
+  //     return "line-through";
+  //   }
+  //   return "";
+  // }
+  
   return (
     <div>
       <ul className={"m-4 rounded-sm bg-gray-50"}>
@@ -109,8 +117,39 @@ function TaskList({ tasks, searchText }: TaskListProps) {
                 type="checkbox"
                 checked={task.completed}
                 className={"mr-2"}
+                onClick={async () => {
+                  const response = await fetch(
+                    `http://localhost:3000/tasks/${task.id}`, {
+                      method: "PATCH",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        completed: !task.completed,
+                      }),
+                  });
+                  const updatedTask: Task = await response.json();
+                  // const updatedTasks: Task[] = [];
+                  // for (const task of tasks) {
+                  //   if (task.id === updatedTask.id) {
+                  //     updatedTasks.push(updatedTask);
+                  //   } else {
+                  //     updatedTasks.push(task);
+                  //   }
+                  // }
+                  const updatedTasks = tasks.map((task) => {
+                    if (task.id === updatedTask.id) {
+                      return updatedTask;
+                    }
+                    return task;
+                  });
+                  setTasks(updatedTasks);
+                }}
               />
-              <span>{task.description}</span>
+              <span
+                // className={isStrikeThough(task.completed)}
+                className={`${task.completed ? "line-through" : ""}`}
+              >{task.description}</span>
             </li>
           ))}
       </ul>
@@ -132,7 +171,10 @@ export function App() {
     <>
       <SearchTask searchText={searchText} setSearchText={setSearchText} />
       <AddTask tasks={tasks} setTasks={setTasks} />
-      <TaskList tasks={tasks} searchText={searchText} />
+      <TaskList
+        tasks={tasks}
+        searchText={searchText}
+        setTasks={setTasks} />
     </>
   );
 }

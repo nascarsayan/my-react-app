@@ -13,7 +13,7 @@
     {
       "id": "3",
       "description": "Go for a walk",
-      "completed": true
+      "completed": false
     },
     {
       "id": "4",
@@ -23,7 +23,7 @@
     {
       "id": "8",
       "description": "Hello Backend again!",
-      "completed": false
+      "completed": true
     },
     {
       "id": "0.08120585537900826",
