@@ -14,3 +14,12 @@ Content-Type: application/json
     "description": "Hello Backend again!",
     "completed": false
 }
+
+###
+
+PATCH http://localhost:3000/tasks/3
+Content-Type: application/json
+
+{
+    "completed": true
+}

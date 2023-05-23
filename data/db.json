@@ -3,17 +3,17 @@
     {
       "id": "1",
       "description": "Drink Water",
-      "completed": false
+      "completed": true
     },
     {
       "id": "2",
       "description": "Have tea",
-      "completed": false
+      "completed": true
     },
     {
       "id": "3",
       "description": "Go for a walk",
-      "completed": false
+      "completed": true
     },
     {
       "id": "4",

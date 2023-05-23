@@ -100,18 +100,18 @@ interface TaskListProps {
 function TaskList({ tasks, searchText }: TaskListProps) {
   return (
     <div>
-      <ul
-        className={"m-4 rounded-sm bg-gray-50"}
-        >
+      <ul className={"m-4 rounded-sm bg-gray-50"}>
         {tasks
-          .filter(
-            (task) => task.description.includes(searchText))
-          .map(
-            (task) => (
-              <li
-                className={"m-2 p-1 rounded-sm bg-gray-100"}
-                >{task.description}
-              </li>
+          .filter((task) => task.description.includes(searchText))
+          .map((task) => (
+            <li className={"m-2 p-1 rounded-sm bg-gray-100"}>
+              <input
+                type="checkbox"
+                checked={task.completed}
+                className={"mr-2"}
+              />
+              <span>{task.description}</span>
+            </li>
           ))}
       </ul>
     </div>
