@@ -8,7 +8,7 @@
     {
       "id": "2",
       "description": "Have tea",
-      "completed": true
+      "completed": false
     },
     {
       "id": "3",

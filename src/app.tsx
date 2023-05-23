@@ -105,7 +105,28 @@ function TaskList({ tasks, setTasks, searchText }: TaskListProps) {
   //   }
   //   return "";
   // }
-  
+
+  // async function onTaskClick (task: Task) {
+  const onTaskClick = async (task: Task) => {
+    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        completed: !task.completed,
+      }),
+    });
+    const updatedTask: Task = await response.json();
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === updatedTask.id) {
+        return updatedTask;
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  };
+
   return (
     <div>
       <ul className={"m-4 rounded-sm bg-gray-50"}>
@@ -117,39 +138,14 @@ function TaskList({ tasks, setTasks, searchText }: TaskListProps) {
                 type="checkbox"
                 checked={task.completed}
                 className={"mr-2"}
-                onClick={async () => {
-                  const response = await fetch(
-                    `http://localhost:3000/tasks/${task.id}`, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        completed: !task.completed,
-                      }),
-                  });
-                  const updatedTask: Task = await response.json();
-                  // const updatedTasks: Task[] = [];
-                  // for (const task of tasks) {
-                  //   if (task.id === updatedTask.id) {
-                  //     updatedTasks.push(updatedTask);
-                  //   } else {
-                  //     updatedTasks.push(task);
-                  //   }
-                  // }
-                  const updatedTasks = tasks.map((task) => {
-                    if (task.id === updatedTask.id) {
-                      return updatedTask;
-                    }
-                    return task;
-                  });
-                  setTasks(updatedTasks);
-                }}
+                onClick={() => onTaskClick(task)}
               />
               <span
                 // className={isStrikeThough(task.completed)}
                 className={`${task.completed ? "line-through" : ""}`}
-              >{task.description}</span>
+              >
+                {task.description}
+              </span>
             </li>
           ))}
       </ul>
