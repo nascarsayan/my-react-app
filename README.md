@@ -34,4 +34,11 @@ const promise = new Promise((resolve, reject) => {
   //   reject("failure reason"); // rejected
 });
 
+### Routes required for backend
+
+POST http://localhost:4000/tasks => Add new task
+
+PATCH http://localhost:4000/tasks/:id => Update task
+
+GET http://localhost:4000/tasks => Get all tasks
 

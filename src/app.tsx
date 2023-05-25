@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'preact/hooks';
 import './app.css';
 
+const BackendUrl = "http://localhost:4000";
+
 interface Task {
   id: string;
   description: string;
@@ -60,7 +62,7 @@ function AddTask({ setTasks, tasks }: AddTaskProps) {
 
     // POST request to the backend.
     const response = await fetch(
-      "http://localhost:3000/tasks", {
+      `${BackendUrl}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,7 +110,8 @@ function TaskList({ tasks, setTasks, searchText }: TaskListProps) {
 
   // async function onTaskClick (task: Task) {
   const onTaskClick = async (task: Task) => {
-    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+    const response = await fetch(
+      `${BackendUrl}/tasks/${task.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -158,7 +161,7 @@ export function App() {
   const [searchText, setSearchText] = useState<string>("");
   // Get the list of tasks from the backend instead.
   useEffect(() => {
-    fetch("http://localhost:3000/tasks")
+    fetch(`${BackendUrl}/tasks`)
       .then((response) => response.json())
       .then((data) => setTasks(data));
   }, []);
