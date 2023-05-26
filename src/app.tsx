@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'preact/hooks';
 import './app.css';
 
-const BackendUrl = "https://task-production-1a89.up.railway.app";
+const BackendUrl = "https://task-production-9ae1.up.railway.app";
 
 interface Task {
   id: string;
