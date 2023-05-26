@@ -55,7 +55,6 @@ function AddTask({ setTasks, tasks }: AddTaskProps) {
 
   const handleAddTask = async () => {
     const newTask = {
-      id: Math.random().toString(),
       description: currentTask,
       completed: false,
     };
